@@ -4,7 +4,7 @@ from typing import List, Dict
 LOGDIR = "Output/Logs"
 
 
-def solve_set_covering(i_name: str, trips: List[Dict], deliveries: List[Delivery]) -> List[Dict]:
+def solve_set_covering(i_name: str, trips: List[Dict], deliveries: List[Delivery]):
     """
     Solve the set covering problem:
     Select a subset of trips so that each delivery is covered exactly once,
@@ -44,5 +44,26 @@ def solve_set_covering(i_name: str, trips: List[Dict], deliveries: List[Delivery
     model.optimize()
 
     selected_trips = [trips[i] for i in x if x[i].X > 0.5]
+    if model.status != GRB.OPTIMAL:
+        print(f"Model did not find an optimal solution for instance {i_name}. "
+              f"Status: {model.status}, Time: {model.Runtime:.2f} seconds")
+        return []
+    if not selected_trips:
+        print(f"No trips selected for instance {i_name}. Check constraints and input data.")
+        return []
+    print(f"Model solved for instance {i_name} with status {model.status}. "
+          f"Total trips selected: {len(selected_trips)}, Time: {model.Runtime:.2f} seconds")
+    for i, t in enumerate(selected_trips):
+        print(f"Trip {i}: Source: {t['source']}, Total KM: {t['total_km']:.2f}, "
+              f"Weight: {t['total_weight']:.2f}, Volume: {t['total_volume']:.2f}, "
+              f"Deliveries: {', '.join(t['shipment_ids'])}, Score: {t['score']:.2f}")
+    # Log selected trips
+    with open(os.path.join(LOGDIR, f"{i_name}.log"), "a") as f:
+        f.write(f"Selected trips for {i_name}:\n")
+        for i, t in enumerate(selected_trips):
+            f.write(f"Trip {i}: Source: {t['source']}, Total KM: {t['total_km']:.2f}, "
+                    f"Weight: {t['total_weight']:.2f}, Volume: {t['total_volume']:.2f}, "
+                    f"Deliveries: {', '.join(t['shipment_ids'])}, Score: {t['score']:.2f}\n")
+
 
     return selected_trips

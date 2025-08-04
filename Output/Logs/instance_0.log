@@ -1,5 +1,51 @@
+Feasible trips for instance_0:
+Source: D0, total_km: 27.00, total_weight: 632.00, total_volume: 0.58, score: 1.00
+Deliveries: D0
 
-Gurobi 12.0.3 (win64) logging started Mon Jul 28 14:58:37 2025
+Source: D1, total_km: 79.00, total_weight: 227.00, total_volume: 1.90, score: 1.00
+Deliveries: D1
+
+Source: D2, total_km: 79.00, total_weight: 206.00, total_volume: 2.40, score: 1.00
+Deliveries: D2
+
+Source: D3, total_km: 45.00, total_weight: 359.00, total_volume: 1.04, score: 1.00
+Deliveries: D3
+
+Source: D4, total_km: 79.00, total_weight: 567.00, total_volume: 2.62, score: 1.00
+Deliveries: D4
+
+Source: D1, total_km: 79.00, total_weight: 433.00, total_volume: 4.30, score: 0.50
+Deliveries: D1, D2
+
+Source: D1, total_km: 58.00, total_weight: 586.00, total_volume: 2.94, score: 0.47
+Deliveries: D1, D3
+
+Source: D1, total_km: 79.00, total_weight: 794.00, total_volume: 4.52, score: 0.50
+Deliveries: D1, D4
+
+Source: D2, total_km: 79.00, total_weight: 773.00, total_volume: 5.02, score: 0.50
+Deliveries: D2, D4
+
+Source: D3, total_km: 92.00, total_weight: 926.00, total_volume: 3.66, score: 0.74
+Deliveries: D3, D4
+
+Source: D0, total_km: 96.00, total_weight: 1218.00, total_volume: 3.52, score: 0.64
+Deliveries: D0, D1, D3
+
+Source: D1, total_km: 58.00, total_weight: 792.00, total_volume: 5.34, score: 0.29
+Deliveries: D1, D2, D3
+
+Source: D1, total_km: 79.00, total_weight: 1000.00, total_volume: 6.92, score: 0.33
+Deliveries: D1, D2, D4
+
+Source: D1, total_km: 105.00, total_weight: 1153.00, total_volume: 5.56, score: 0.52
+Deliveries: D1, D3, D4
+
+Source: D2, total_km: 105.00, total_weight: 1132.00, total_volume: 6.06, score: 0.52
+Deliveries: D2, D3, D4
+
+
+Gurobi 12.0.3 (win64) logging started Mon Aug  4 19:00:07 2025
 
 Set parameter LogFile to value "Output/Logs\instance_0.log"
 Set parameter TimeLimit to value 3600
@@ -13,224 +59,38 @@ Non-default parameters:
 TimeLimit  3600
 Seed  12345
 
-Optimize a model with 5 rows, 14 columns and 26 nonzeros
-Model fingerprint: 0x5140c80c
-Variable types: 0 continuous, 14 integer (14 binary)
+Optimize a model with 5 rows, 15 columns and 30 nonzeros
+Model fingerprint: 0x753715f8
+Variable types: 0 continuous, 15 integer (15 binary)
 Coefficient statistics:
   Matrix range     [1e+00, 1e+00]
-  Objective range  [2e+01, 7e+01]
+  Objective range  [3e-01, 1e+00]
   Bounds range     [1e+00, 1e+00]
   RHS range        [1e+00, 1e+00]
-Found heuristic solution: objective 145.0000000
+Found heuristic solution: objective 5.0000000
+Presolve removed 1 rows and 2 columns
 Presolve time: 0.00s
-Presolved: 5 rows, 14 columns, 26 nonzeros
-Variable types: 0 continuous, 14 integer (14 binary)
+Presolved: 4 rows, 13 columns, 26 nonzeros
+Variable types: 0 continuous, 13 integer (13 binary)
 
-Root relaxation: objective 8.700000e+01, 4 iterations, 0.00 seconds (0.00 work units)
+Root relaxation: objective 1.135762e+00, 3 iterations, 0.00 seconds (0.00 work units)
 
     Nodes    |    Current Node    |     Objective Bounds      |     Work
  Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
 
-*    0     0               0      87.0000000   87.00000  0.00%     -    0s
+*    0     0               0       1.1357616    1.13576  0.00%     -    0s
 
-Explored 1 nodes (4 simplex iterations) in 0.01 seconds (0.00 work units)
+Explored 1 nodes (3 simplex iterations) in 0.01 seconds (0.00 work units)
 Thread count was 8 (of 8 available processors)
 
-Solution count 2: 87 145 
+Solution count 2: 1.13576 5 
 
 Optimal solution found (tolerance 1.00e-04)
-Best objective 8.700000000000e+01, best bound 8.700000000000e+01, gap 0.0000%
+Best objective 1.135761589404e+00, best bound 1.135761589404e+00, gap 0.0000%
+Selected trips for instance_0:
+Trip 0: Source: D2, Total KM: 79.00, Weight: 773.00, Volume: 5.02, Deliveries: D2, D4, Score: 0.50
+Trip 1: Source: D0, Total KM: 96.00, Weight: 1218.00, Volume: 3.52, Deliveries: D0, D1, D3, Score: 0.64
 Deliveries count: 5
-Feasible trips generated: 14
+Feasible trips generated: 15
 Trips selected: 2
-Elapsed time (seconds): 0.01
-
-Gurobi 12.0.3 (win64) logging started Mon Jul 28 14:59:01 2025
-
-Set parameter LogFile to value "Output/Logs\instance_0.log"
-Set parameter TimeLimit to value 3600
-Set parameter Seed to value 12345
-Gurobi Optimizer version 12.0.3 build v12.0.3rc0 (win64 - Windows 11.0 (26100.2))
-
-CPU model: Intel(R) Core(TM) i5-10310U CPU @ 1.70GHz, instruction set [SSE2|AVX|AVX2]
-Thread count: 4 physical cores, 8 logical processors, using up to 8 threads
-
-Non-default parameters:
-TimeLimit  3600
-Seed  12345
-
-Optimize a model with 5 rows, 14 columns and 26 nonzeros
-Model fingerprint: 0x5140c80c
-Variable types: 0 continuous, 14 integer (14 binary)
-Coefficient statistics:
-  Matrix range     [1e+00, 1e+00]
-  Objective range  [2e+01, 7e+01]
-  Bounds range     [1e+00, 1e+00]
-  RHS range        [1e+00, 1e+00]
-Found heuristic solution: objective 145.0000000
-Presolve time: 0.00s
-Presolved: 5 rows, 14 columns, 26 nonzeros
-Variable types: 0 continuous, 14 integer (14 binary)
-
-Root relaxation: objective 8.700000e+01, 4 iterations, 0.00 seconds (0.00 work units)
-
-    Nodes    |    Current Node    |     Objective Bounds      |     Work
- Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
-
-*    0     0               0      87.0000000   87.00000  0.00%     -    0s
-
-Explored 1 nodes (4 simplex iterations) in 0.01 seconds (0.00 work units)
-Thread count was 8 (of 8 available processors)
-
-Solution count 2: 87 145 
-
-Optimal solution found (tolerance 1.00e-04)
-Best objective 8.700000000000e+01, best bound 8.700000000000e+01, gap 0.0000%
-Deliveries count: 5
-Feasible trips generated: 14
-Trips selected: 2
-Elapsed time (seconds): 0.01
-
-Gurobi 12.0.3 (win64) logging started Mon Jul 28 14:59:28 2025
-
-Set parameter LogFile to value "Output/Logs\instance_0.log"
-Set parameter TimeLimit to value 3600
-Set parameter Seed to value 12345
-Gurobi Optimizer version 12.0.3 build v12.0.3rc0 (win64 - Windows 11.0 (26100.2))
-
-CPU model: Intel(R) Core(TM) i5-10310U CPU @ 1.70GHz, instruction set [SSE2|AVX|AVX2]
-Thread count: 4 physical cores, 8 logical processors, using up to 8 threads
-
-Non-default parameters:
-TimeLimit  3600
-Seed  12345
-
-Optimize a model with 5 rows, 22 columns and 54 nonzeros
-Model fingerprint: 0x2ffe5bb2
-Variable types: 0 continuous, 22 integer (22 binary)
-Coefficient statistics:
-  Matrix range     [1e+00, 1e+00]
-  Objective range  [2e+01, 2e+02]
-  Bounds range     [1e+00, 1e+00]
-  RHS range        [1e+00, 1e+00]
-Found heuristic solution: objective 145.0000000
-Presolve removed 0 rows and 3 columns
-Presolve time: 0.00s
-Presolved: 5 rows, 19 columns, 41 nonzeros
-Variable types: 0 continuous, 19 integer (19 binary)
-
-Root relaxation: objective 8.700000e+01, 4 iterations, 0.00 seconds (0.00 work units)
-
-    Nodes    |    Current Node    |     Objective Bounds      |     Work
- Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
-
-*    0     0               0      87.0000000   87.00000  0.00%     -    0s
-
-Explored 1 nodes (4 simplex iterations) in 0.01 seconds (0.00 work units)
-Thread count was 8 (of 8 available processors)
-
-Solution count 2: 87 145 
-
-Optimal solution found (tolerance 1.00e-04)
-Best objective 8.700000000000e+01, best bound 8.700000000000e+01, gap 0.0000%
-Deliveries count: 5
-Feasible trips generated: 22
-Trips selected: 2
-Elapsed time (seconds): 0.01
-
-Gurobi 12.0.3 (win64) logging started Mon Jul 28 14:59:57 2025
-
-Set parameter LogFile to value "Output/Logs\instance_0.log"
-Set parameter TimeLimit to value 3600
-Set parameter Seed to value 12345
-Gurobi Optimizer version 12.0.3 build v12.0.3rc0 (win64 - Windows 11.0 (26100.2))
-
-CPU model: Intel(R) Core(TM) i5-10310U CPU @ 1.70GHz, instruction set [SSE2|AVX|AVX2]
-Thread count: 4 physical cores, 8 logical processors, using up to 8 threads
-
-Non-default parameters:
-TimeLimit  3600
-Seed  12345
-
-Optimize a model with 5 rows, 28 columns and 73 nonzeros
-Model fingerprint: 0x23d2e6e3
-Variable types: 0 continuous, 28 integer (28 binary)
-Coefficient statistics:
-  Matrix range     [1e+00, 1e+00]
-  Objective range  [2e+01, 2e+02]
-  Bounds range     [1e+00, 1e+00]
-  RHS range        [1e+00, 1e+00]
-Found heuristic solution: objective 145.0000000
-Presolve removed 0 rows and 5 columns
-Presolve time: 0.00s
-Presolved: 5 rows, 23 columns, 52 nonzeros
-Variable types: 0 continuous, 23 integer (23 binary)
-
-Root relaxation: objective 8.700000e+01, 4 iterations, 0.01 seconds (0.00 work units)
-
-    Nodes    |    Current Node    |     Objective Bounds      |     Work
- Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
-
-*    0     0               0      87.0000000   87.00000  0.00%     -    0s
-
-Explored 1 nodes (4 simplex iterations) in 0.02 seconds (0.00 work units)
-Thread count was 8 (of 8 available processors)
-
-Solution count 2: 87 145 
-
-Optimal solution found (tolerance 1.00e-04)
-Best objective 8.700000000000e+01, best bound 8.700000000000e+01, gap 0.0000%
-Deliveries count: 5
-Feasible trips generated: 28
-Trips selected: 2
-Elapsed time (seconds): 0.02
-
-Gurobi 12.0.3 (win64) logging started Mon Jul 28 15:03:57 2025
-
-Set parameter LogFile to value "Output/Logs\instance_0.log"
-Set parameter TimeLimit to value 3600
-Set parameter Seed to value 12345
-Gurobi Optimizer version 12.0.3 build v12.0.3rc0 (win64 - Windows 11.0 (26100.2))
-
-CPU model: Intel(R) Core(TM) i5-10310U CPU @ 1.70GHz, instruction set [SSE2|AVX|AVX2]
-Thread count: 4 physical cores, 8 logical processors, using up to 8 threads
-
-Non-default parameters:
-TimeLimit  3600
-Seed  12345
-
-Optimize a model with 5 rows, 22 columns and 54 nonzeros
-Model fingerprint: 0x2ee48f3b
-Variable types: 0 continuous, 22 integer (22 binary)
-Coefficient statistics:
-  Matrix range     [1e+00, 1e+00]
-  Objective range  [7e+00, 4e+01]
-  Bounds range     [1e+00, 1e+00]
-  RHS range        [1e+00, 1e+00]
-Found heuristic solution: objective 145.0000000
-Presolve time: 0.00s
-Presolved: 5 rows, 22 columns, 54 nonzeros
-Variable types: 0 continuous, 22 integer (22 binary)
-
-Root relaxation: objective 3.087500e+01, 4 iterations, 0.00 seconds (0.00 work units)
-
-    Nodes    |    Current Node    |     Objective Bounds      |     Work
- Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
-
-     0     0   30.87500    0    3  145.00000   30.87500  78.7%     -    0s
-H    0     0                      53.7500000   30.87500  42.6%     -    0s
-H    0     0                      32.5000000   30.87500  5.00%     -    0s
-H    0     0                      31.2000000   30.87500  1.04%     -    0s
-     0     0   30.87500    0    3   31.20000   30.87500  1.04%     -    0s
-
-Explored 1 nodes (4 simplex iterations) in 0.01 seconds (0.00 work units)
-Thread count was 8 (of 8 available processors)
-
-Solution count 4: 31.2 32.5 53.75 145 
-
-Optimal solution found (tolerance 1.00e-04)
-Best objective 3.120000000000e+01, best bound 3.120000000000e+01, gap 0.0000%
-Deliveries count: 5
-Feasible trips generated: 22
-Trips selected: 1
-Elapsed time (seconds): 0.02
+Elapsed time (seconds): 0.03

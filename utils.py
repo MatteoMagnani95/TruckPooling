@@ -36,7 +36,7 @@ def generate_instances(num_instances: int,
                        delivery_window_min: int,
                        delivery_window_duration_min: int,
                        incompatibility_pairs_ratio: float,
-                       seed: int = 42,
+                       seed: int = 12345,
                        slot_duration: int = 15):
     """
     Generate delivery instances with discretized time fields.
@@ -55,8 +55,8 @@ def generate_instances(num_instances: int,
 
     # Incompatibilities
     all_pairs = [(a, b) for i, a in enumerate(goods_types) for b in goods_types[i+1:]]
-    num_incompat = int(len(all_pairs) * incompatibility_pairs_ratio)
-    incompatibility_pairs = set(random.sample(all_pairs, num_incompat))
+    #num_incompat = int(len(all_pairs) * incompatibility_pairs_ratio)
+    #incompatibility_pairs = set(random.sample(all_pairs, num_incompat))
 
     # Distance matrix
     locs = locations + ["Mpx"] if "Mpx" not in locations else locations
@@ -71,8 +71,8 @@ def generate_instances(num_instances: int,
     dist_df.to_csv("Instances/distance_matrix.csv")
 
     # Save incompatibility pairs
-    incompat_df = pd.DataFrame(list(incompatibility_pairs), columns=["GoodsType1", "GoodsType2"])
-    incompat_df.to_csv("Instances/incompatibility_pairs.csv", index=False)
+    #incompat_df = pd.DataFrame(list(incompatibility_pairs), columns=["GoodsType1", "GoodsType2"])
+    #incompat_df.to_csv("Instances/incompatibility_pairs.csv", index=False)
 
     for inst_id in range(num_instances):
         deliveries = []

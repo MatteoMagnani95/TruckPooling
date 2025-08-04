@@ -4,7 +4,7 @@ from typing import List, Dict, Set
 import pandas as pd
 
 
-MAX_PICKUPS = 5  # max number of pickups allowed in a single trip
+MAX_PICKUPS = 3  # max number of pickups allowed in a single trip
 MAX_WAIT_SLOT = 2 # max 2 slots wait time allowed
 MAX_DISTANCE_INCREASE_RATIO = 0.2  # max 20% detour allowed
 
@@ -48,7 +48,6 @@ def check_incompatibility(goods_types: List[str], incompat_set: Set[tuple]) -> b
 
 
 def generate_feasible_trips(deliveries: List[Delivery],
-                            transporter_id: str,
                             capacity_kg: float,
                             capacity_m3: float,
                             dist_matrix: pd.DataFrame,
@@ -73,14 +72,14 @@ def generate_feasible_trips(deliveries: List[Delivery],
             if trip_distance > direct_distances * (1 + MAX_DISTANCE_INCREASE_RATIO):
                 continue
 
-            score = trip_distance / len(combo)
+            score = trip_distance / direct_distances
             feasible_trips.append({
-                "transporter_id": transporter_id,
+                "source": combo[0].id,
                 "shipment_ids": [d.id for d in combo],
-                "total_km": trip_distance,
+                "total_km": float(trip_distance),
                 "total_weight": sum(d.weight_kg for d in combo),
                 "total_volume": sum(d.volume_m3 for d in combo),
-                "score": score
+                "score": float(score)
             })
 
     return feasible_trips

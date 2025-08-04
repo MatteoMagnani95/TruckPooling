@@ -2,7 +2,7 @@ import os
 import time
 from utils import generate_instances, read_instance_files
 from Trip_generation import generate_feasible_trips
-from Set_covering import solve_set_covering
+from Set_covering import solve_set_covering, LOGDIR
 from collections import namedtuple
 
 Delivery = namedtuple('Delivery',
@@ -42,19 +42,36 @@ if __name__ == "__main__":
         start_time = time.time()
 
         # Transporter info
-        transporter_id = f"T{idx}"
         capacity_kg = 4000
         capacity_m3 = 15.0
 
         # Generate feasible trips
         feasible_trips = generate_feasible_trips(
             deliveries=deliveries,
-            transporter_id=transporter_id,
             capacity_kg=capacity_kg,
             capacity_m3=capacity_m3,
             dist_matrix=dist_df,
             incompat_set=incompat_set
         )
+        # write feasible trips to a log file
+        with open(os.path.join(LOGDIR, f"{i_name}.log"), "w") as f:
+            f.write(f"Feasible trips for {i_name}:\n")
+            for trip in feasible_trips:
+                f.write(f"Source: {trip['source']}, total_km: {trip['total_km']:.2f}, "
+                        f"total_weight: {trip['total_weight']:.2f}, "
+                        f"total_volume: {trip['total_volume']:.2f}, score: {trip['score']:.2f}\n")
+                f.write(f"Deliveries: {', '.join(trip['shipment_ids'])}\n\n")
+        print(f"Generated {len(feasible_trips)} feasible trips for {i_name}")
+
+        # print the matrix of feasible trips
+        print("Feasible trips matrix:")
+        for trip in feasible_trips:
+            print(f"Source: {trip['source']}, Total KM: {trip['total_km']:.2f}, "
+                  f"Weight: {trip['total_weight']:.2f}, Volume: {trip['total_volume']:.2f}, "
+                  f"score: {trip['score']:.2f}, Deliveries: {', '.join(trip['shipment_ids'])}")
+
+
+
         # Solve set covering
         selected_trips = solve_set_covering(i_name, feasible_trips, deliveries)
 
@@ -68,7 +85,7 @@ if __name__ == "__main__":
             fsol.write(f"# Number of feasible trips generated: {len(feasible_trips)}\n")
             fsol.write(f"# Number of trips selected: {len(selected_trips)}\n\n")
             for t in selected_trips:
-                fsol.write(f"Trip transporter_id: {t['transporter_id']}, total_km: {t['total_km']:.2f}, "
+                fsol.write(f"Source: {t['source']}, total_km: {t['total_km']:.2f}, "
                            f"weight: {t['total_weight']:.2f}, volume: {t['total_volume']:.2f}\n")
                 fsol.write(f"Deliveries: {', '.join(t['shipment_ids'])}\n\n")
 
@@ -79,4 +96,3 @@ if __name__ == "__main__":
             flog.write(f"Feasible trips generated: {len(feasible_trips)}\n")
             flog.write(f"Trips selected: {len(selected_trips)}\n")
             flog.write(f"Elapsed time (seconds): {elapsed:.2f}\n")
-

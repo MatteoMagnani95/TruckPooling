@@ -1,6 +1,6 @@
 ,Linate,Bergamo,Piacenza,Varese,Mpx
-Linate,0,24,13,45,41
-Bergamo,24,0,38,27,23
-Piacenza,13,38,0,96,79
-Varese,45,27,96,0,21
-Mpx,41,23,79,21,0
+Linate,0,91,24,13,45
+Bergamo,91,0,41,38,27
+Piacenza,24,41,0,23,96
+Varese,13,38,23,0,79
+Mpx,45,27,96,79,0
