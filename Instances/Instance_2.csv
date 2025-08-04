@@ -1,0 +1,6 @@
+id,goods_type,weight_kg,volume_m3,goods_ready_slot,window_start_slot,window_end_slot,gha,pickup_location,available_weight,available_volume,loaded_goods_ids
+D0,Chemical,855,2.22,35,38,42,GHA3,Piacenza,855,2.22,
+D1,Pharma,994,0.64,39,44,48,GHA2,Varese,994,0.64,
+D2,Food,416,2.78,34,36,40,GHA1,Varese,416,2.78,
+D3,Food,858,1.65,35,41,45,GHA1,Bergamo,858,1.65,
+D4,Fragile,751,1.16,38,42,46,GHA3,Varese,751,1.16,
