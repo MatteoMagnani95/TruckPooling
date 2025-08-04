@@ -12,9 +12,13 @@ Logging and Output: Saves both detailed solution files and execution logs for ea
 
 ## Project Structure
 ├── main.py                  # Main execution script
+
 ├── utils.py                 # Utilities for instance generation and parsing
+
 ├── Trip_generation.py       # Feasible trip generation logic
+
 ├── Set_covering.py          # Set covering solver
+
 ├── Output/
 │   ├── Sols/                # Solutions (.sol files)
 │   └── Logs/                # Logs (.log files)
