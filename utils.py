@@ -1,17 +1,5 @@
 import os
 import random
-from collections import namedtuple
-from datetime import datetime, timedelta
-import pandas as pd
-import numpy as np
-
-# Define Delivery namedtuple with extra fields
-Delivery = namedtuple('Delivery',
-                      'id goods_type weight_kg volume_m3 goods_ready delivery_window gha pickup_location '
-                      'available_weight available_volume loaded_goods_ids')
-
-import os
-import random
 import pandas as pd
 import numpy as np
 from collections import namedtuple
@@ -23,7 +11,7 @@ Delivery = namedtuple('Delivery',
 def time_to_slot(minutes: int, slot_duration: int) -> int:
     return minutes // slot_duration
 
-def generate_instances(num_instances: int,
+def generate_instances(num_instances: int, i_name: str,
                        goods_types: list,
                        locations: list,
                        min_weight: int,
@@ -35,7 +23,6 @@ def generate_instances(num_instances: int,
                        max_ready_offset_min: int,
                        delivery_window_min: int,
                        delivery_window_duration_min: int,
-                       incompatibility_pairs_ratio: float,
                        seed: int = 12345,
                        slot_duration: int = 15):
     """
@@ -54,9 +41,9 @@ def generate_instances(num_instances: int,
     os.makedirs("Instances", exist_ok=True)
 
     # Incompatibilities
-    all_pairs = [(a, b) for i, a in enumerate(goods_types) for b in goods_types[i+1:]]
-    #num_incompat = int(len(all_pairs) * incompatibility_pairs_ratio)
-    #incompatibility_pairs = set(random.sample(all_pairs, num_incompat))
+    # all_pairs = [(a, b) for i, a in enumerate(goods_types) for b in goods_types[i+1:]]
+    # num_incompat = int(len(all_pairs) * incompatibility_pairs_ratio)
+    # incompatibility_pairs = set(random.sample(all_pairs, num_incompat))
 
     # Distance matrix
     locs = locations + ["Mpx"] if "Mpx" not in locations else locations
@@ -68,7 +55,7 @@ def generate_instances(num_instances: int,
             dist_matrix[i, j] = dist
             dist_matrix[j, i] = dist
     dist_df = pd.DataFrame(dist_matrix, index=locs, columns=locs)
-    dist_df.to_csv("Instances/distance_matrix.csv")
+    dist_df.to_csv(f"Instances/{i_name}/distance_matrix.csv")
 
     # Save incompatibility pairs
     #incompat_df = pd.DataFrame(list(incompatibility_pairs), columns=["GoodsType1", "GoodsType2"])
@@ -124,12 +111,12 @@ def generate_instances(num_instances: int,
             "loaded_goods_ids": ",".join(d.loaded_goods_ids)
         } for d in deliveries])
 
-        filename = f"Instances/Instance_{inst_id}.csv"
+        filename = f"Instances/{i_name}/Instance_{inst_id}.csv"
         df_del.to_csv(filename, index=False)
         print(f"Saved instance {inst_id+1}/{num_instances} to {filename}")
 
 
-def read_instance_files(instances_folder="Instances"):
+def read_instance_files(instances_folder):
     """
     Read all instance CSVs, distance matrix and incompatibility pairs from folder,
     using discretized time (minutes from midnight as integers).
@@ -141,7 +128,7 @@ def read_instance_files(instances_folder="Instances"):
         tuple: (list_of_deliveries_lists, distance_df, incompatibility_set)
     """
     deliveries_list = []
-
+    incompatibility_set = set()
     for file in sorted(os.listdir(instances_folder)):
         if file.startswith("Instance_") and file.endswith(".csv"):
             path = os.path.join(instances_folder, file)
@@ -167,8 +154,8 @@ def read_instance_files(instances_folder="Instances"):
             deliveries_list.append(deliveries)
 
     dist_df = pd.read_csv(os.path.join(instances_folder, "distance_matrix.csv"), index_col=0)
-    incompat_df = pd.read_csv(os.path.join(instances_folder, "incompatibility_pairs.csv"))
-    incompatibility_set = set(zip(incompat_df["GoodsType1"], incompat_df["GoodsType2"]))
+    #incompat_df = pd.read_csv(os.path.join(instances_folder, "incompatibility_pairs.csv"))
+    #incompatibility_set = set(zip(incompat_df["GoodsType1"], incompat_df["GoodsType2"]))
 
     return deliveries_list, dist_df, incompatibility_set
 
